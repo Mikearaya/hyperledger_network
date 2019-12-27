@@ -13,7 +13,7 @@ function json_ccp() {
         -e "s/\${CAPORT}/$4/" \
         -e "s#\${PEERPEM}#$PP#" \
         -e "s#\${CAPEM}#$CP#" \
-        ccp-template.json
+        templates/ccp-template.json
 }
 
 function yaml_ccp() {
@@ -25,7 +25,7 @@ function yaml_ccp() {
         -e "s/\${CAPORT}/$4/" \
         -e "s#\${PEERPEM}#$PP#" \
         -e "s#\${CAPEM}#$CP#" \
-        ccp-template.yaml | sed -e $'s/\\\\n/\\\n        /g'
+        templates/ccp-template.yaml | sed -e $'s/\\\\n/\\\n        /g'
 }
 
 ORG=1
