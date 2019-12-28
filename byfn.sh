@@ -29,7 +29,7 @@
 # prepending $PWD/../bin to PATH to ensure we are picking up the correct binaries
 # this may be commented out to resolve installed version of tools if desired
 export PATH=${PWD}/bin:${PWD}:$PATH
-export FABRIC_CFG_PATH=${PWD}/config
+export FABRIC_CFG_PATH=${PWD}/config # Used for configtx tool
 export VERBOSE=false
 
 # Print the usage message
@@ -307,7 +307,7 @@ function replacePrivateKey() {
   fi
 
   # Copy the template to the file that will be modified to add the private key
-  cp docker-compose-e2e-template.yaml docker-compose-e2e.yaml
+  cp templates/docker-compose-e2e-template.yaml docker-compose-e2e.yaml
 
   # The next steps will replace the template's contents with the
   # actual values of the private key file names for the two CAs.
