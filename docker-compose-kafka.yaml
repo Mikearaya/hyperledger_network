@@ -3,7 +3,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-
 # NOTE: This is not the way a Kafka cluster would normally be deployed in production, as it is not secure
 # and is not fault tolerant. This example is a toy deployment that is only meant to exercise the Kafka code path
 # of the ordering service.
@@ -11,27 +10,27 @@
 version: '2'
 
 networks:
-  byfn:
+  bionic:
 
 services:
-  zookeeper.example.com:
-    container_name: zookeeper.example.com
+  zookeeper.bionic.com:
+    container_name: zookeeper.bionic.com
     image: hyperledger/fabric-zookeeper:$IMAGE_TAG
     environment:
       ZOOKEEPER_CLIENT_PORT: 32181
       ZOOKEEPER_TICK_TIME: 2000
     networks:
-    - byfn
+      - bionic
 
-  kafka.example.com:
-    container_name: kafka.example.com
+  kafka.bionic.com:
+    container_name: kafka.bionic.com
     image: hyperledger/fabric-kafka:$IMAGE_TAG
     depends_on:
-    - zookeeper.example.com
+      - zookeeper.bionic.com
     environment:
       - KAFKA_BROKER_ID=1
-      - KAFKA_ZOOKEEPER_CONNECT=zookeeper.example.com:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka.example.com:9092
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper.bionic.com:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka.bionic.com:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
       - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
       - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
@@ -40,4 +39,4 @@ services:
       - KAFKA_MIN_INSYNC_REPLICAS=1
       - KAFKA_DEFAULT_REPLICATION_FACTOR=1
     networks:
-    - byfn
+      - bionic
