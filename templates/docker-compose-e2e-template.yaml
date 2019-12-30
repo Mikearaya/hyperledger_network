@@ -11,6 +11,8 @@ volumes:
   peer1.org1.bionic.com:
   peer0.org2.bionic.com:
   peer1.org2.bionic.com:
+  peer0.org3.bionic.com:
+  peer1.org3.bionic.com:
 
 networks:
   bionic:
@@ -46,6 +48,22 @@ services:
     volumes:
       - ../crypto-config/peerOrganizations/org2.bionic.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerOrg2
+    networks:
+      - bionic
+    ca2:
+    image: hyperledger/fabric-ca:$IMAGE_TAG
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-org3
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.org3.bionic.com-cert.pem
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY
+    ports:
+      - '9054:8054'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org3.bionic.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY -b admin:adminpw -d'
+    volumes:
+      - ../crypto-config/peerOrganizations/org3.bionic.com/ca/:/etc/hyperledger/fabric-ca-server-config
+    container_name: ca_peerOrg3
     networks:
       - bionic
 
@@ -88,7 +106,8 @@ services:
       service: peer1.org2.bionic.com
     networks:
       - bionic
-  peer0.org3.bionic.com:
+
+    peer0.org3.bionic.com:
     container_name: peer0.org3.bionic.com
     extends:
       file: ../base/docker-compose-base.yaml
@@ -96,7 +115,7 @@ services:
     networks:
       - bionic
 
-  peer1.org2.bionic.com:
+  peer1.org3.bionic.com:
     container_name: peer1.org3.bionic.com
     extends:
       file: ../base/docker-compose-base.yaml

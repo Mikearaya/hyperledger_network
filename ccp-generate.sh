@@ -51,8 +51,8 @@ echo "$(yaml_ccp $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" >connection-org2
 
 ORG=3
 P0PORT=6051
-P1PORT=60051
-CAPORT=6054
+P1PORT=11051
+CAPORT=8054
 PEERPEM=crypto-config/peerOrganizations/org3.bionic.com/tlsca/tlsca.org3.bionic.com-cert.pem
 CAPEM=crypto-config/peerOrganizations/org3.bionic.com/ca/ca.org3.bionic.com-cert.pem
 
