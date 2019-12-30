@@ -48,3 +48,13 @@ CAPEM=crypto-config/peerOrganizations/org2.bionic.com/ca/ca.org2.bionic.com-cert
 
 echo "$(json_ccp $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" >connection-org2.json
 echo "$(yaml_ccp $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" >connection-org2.yaml
+
+ORG=3
+P0PORT=6051
+P1PORT=60051
+CAPORT=6054
+PEERPEM=crypto-config/peerOrganizations/org3.bionic.com/tlsca/tlsca.org3.bionic.com-cert.pem
+CAPEM=crypto-config/peerOrganizations/org3.bionic.com/ca/ca.org3.bionic.com-cert.pem
+
+echo "$(json_ccp $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" >connection-org3.json
+echo "$(yaml_ccp $ORG $P0PORT $P1PORT $CAPORT $PEERPEM $CAPEM)" >connection-org3.yaml

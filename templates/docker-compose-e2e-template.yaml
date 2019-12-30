@@ -88,3 +88,18 @@ services:
       service: peer1.org2.bionic.com
     networks:
       - bionic
+  peer0.org3.bionic.com:
+    container_name: peer0.org3.bionic.com
+    extends:
+      file: ../base/docker-compose-base.yaml
+      service: peer0.org3.bionic.com
+    networks:
+      - bionic
+
+  peer1.org2.bionic.com:
+    container_name: peer1.org3.bionic.com
+    extends:
+      file: ../base/docker-compose-base.yaml
+      service: peer1.org3.bionic.com
+    networks:
+      - bionic
